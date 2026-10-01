@@ -1,0 +1,13 @@
+{
+  "name": "build-git-learn-git",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A JavaScript learning project inspired by Build GIT - Learn GIT.",
+  "type": "module",
+  "scripts": {
+    "check": "node --check src/git.js"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
