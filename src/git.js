@@ -1,39 +1,66 @@
 /** A commit in the in-memory Git model. */
 export class Commit {
   constructor(id, parent, message) {
-    // TODO: Store the commit's id, parent and message.
-    throw new Error('TODO: Implement Commit');
+    this.id = id;
+    this.parent = parent;
+    this.message = message;
   }
 }
 
 /** A named pointer to a commit. */
 export class Branch {
   constructor(name, commit) {
-    // TODO: Store the branch's name and current commit.
-    throw new Error('TODO: Implement Branch');
+    this.name = name;
+    this.commit = commit;
   }
 }
 
 /** An educational Git model to implement while following the article. */
 export class Git {
   constructor(name) {
-    // TODO: Initialize the repository name and its starting state.
-    // Add commit IDs, branches and HEAD as you progress through the article.
-    throw new Error('TODO: Implement Git initialization');
+    this.name = name;
+    this.lastCommitId = 0;
+
+    const initialBranch = new Branch('master', null);
+
+    this.branches = [initialBranch];
+    this.HEAD = initialBranch;
   }
 
   commit(message) {
-    // TODO: Create a commit linked to its parent and update the current pointer.
-    throw new Error('TODO: Implement commit');
+    const newCommit = new Commit(
+      ++this.lastCommitId,
+      this.HEAD.commit,
+      message
+    );
+
+    this.HEAD.commit = newCommit;
+    return newCommit;
   }
 
   log() {
-    // TODO: Return the current history, newest commit first.
-    throw new Error('TODO: Implement log');
+    const history = [];
+    let current = this.HEAD.commit;
+
+    while (current !== null) {
+      history.push(current);
+      current = current.parent;
+    }
+
+    return history;
   }
 
   checkout(branchName) {
-    // TODO: Switch to an existing branch, or create one at the current commit.
-    throw new Error('TODO: Implement checkout');
+    let branch = this.branches.find(
+      branch => branch.name === branchName
+    );
+
+    if (!branch) {
+      branch = new Branch(branchName, this.HEAD.commit);
+      this.branches.push(branch);
+    }
+
+    this.HEAD = branch;
+    return branch;
   }
 }
