@@ -1,11 +1,13 @@
 {
   "name": "build-git-learn-git",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
-  "description": "A JavaScript learning project inspired by Build GIT - Learn GIT.",
+  "description": "An educational Git model with file snapshots and HTTP sharing over a LAN.",
   "type": "module",
   "scripts": {
-    "check": "node --check src/git.js"
+    "check": "node --check src/git.js && node --check src/remote.js && node --check src/repository.js && node --check src/cli.js",
+    "test": "node --test",
+    "start": "node src/cli.js"
   },
   "engines": {
     "node": ">=22"
